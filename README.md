@@ -18,3 +18,8 @@ floating point precision for faster computation, and I load the model to the GPU
 
 To generate a fictional animal language, I retrieve the OpenAI API Key, and set up my OpenAI APi Client. I then define a structured promt defining fictional world 
 where animals communicate with each other via unique phrases, and I ask the model to continue the list of new animal phrases. I set the temperature to 0.7 ensuring a certain degree of randomness, and set the top_p=1.0 to ensure that the response is generated with a higher probability of diversity. I then extract the generated animal phrases and save it as a .txt file in an array.
+
+# How to improve the quality of images and sounds
+
+To improve the quality of images and sounds, I would need to use higher resolution images, optimize the image size , to use a modern image format like WebP and AVIF, I should also use image scaling to make sure they are properly displayed. To improve the quality of sound, I can use hight-quality audio files, use
+compression without loss of quality, normalize audio levels, and to loop audio files efficiently to amke sure the sound fades in and out without any transitions.
