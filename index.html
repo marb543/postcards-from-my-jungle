@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postcards From My Jungle</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        img {
+            width: 300px;
+            height: auto;
+            margin: 20px;
+        }
+
+        #phrase {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Postcards From My Jungle</h1>
+    <p>Click anywhere to start sound, image, and phrase playback.</p>
+    <img id="image" src="images/fictional_animal_1.png" alt="Animal Image">
+    <audio id="sound"></audio>
+    <div id="phrase"></div> <!-- Div to display the phrases -->
+
+    <script>
+        const animalPhrases = [
+            'Flap-flap-woo!', 'Snuffle-snort!', 'Zing-zing!', 'Thump-thump!', 'Purr-blip!',
+            'Hoo-hoo-hah!', 'Twang-twang!', 'Whinny-hee!', 'Bloop-bloop!', 'Swoosh-swoosh!',
+            'Chatter-chatter!', 'Flick-flick!', 'Gurgle-gurgle!', 'Rumble-roar!', 'Creak-creak!',
+            'Doodle-doo!', 'Waddle-waddle!', 'Pip-pip!', 'Flick-flick-snap!'
+        ];
+
+        const totalImages = 10; // Change this to match the number of images
+        const totalSounds = 4;  // Number of sounds available
+        let currentIndex = 1;
+        let hasStarted = false;
+
+        function updateMedia() {
+            const imageElement = document.getElementById("image");
+            const soundElement = document.getElementById("sound");
+            const phraseElement = document.getElementById("phrase");
+
+            // Update image
+            const imagePath = `images/fictional_animal_${currentIndex}.png`;
+            imageElement.src = imagePath;
+
+            // Cycle through sounds
+            const soundIndex = ((currentIndex - 1) % totalSounds) + 1;
+            const soundPath = `sounds/animal_sound_${soundIndex}.wav`;
+            soundElement.src = soundPath;
+
+            // Display phrase
+            const phraseIndex = ((currentIndex - 1) % animalPhrases.length);
+            phraseElement.textContent = animalPhrases[phraseIndex];
+
+            // Try playing sound
+            soundElement.play().catch(error => {
+                console.log("Autoplay prevented. User interaction needed.");
+            });
+
+            // Move to the next image
+            currentIndex = (currentIndex % totalImages) + 1;
+        }
+
+        // Set initial image on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("image").src = `images/fictional_animal_1.png`;
+        });
+
+        // Start loop after user clicks
+        document.body.addEventListener("click", function () {
+            if (!hasStarted) {
+                hasStarted = true;
+                updateMedia();
+                setInterval(updateMedia, 2500);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
